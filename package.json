@@ -1,0 +1,19 @@
+{
+  "name": "nodejs-aws-be",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": ""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Metre-Ray/nodejs-aws-be.git"
+  },
+  "author": "Diana Loika",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Metre-Ray/nodejs-aws-be/issues"
+  },
+  "homepage": "https://github.com/Metre-Ray/nodejs-aws-be#readme"
+}
