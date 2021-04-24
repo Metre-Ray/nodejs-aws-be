@@ -3,3 +3,6 @@ node_modules
 
 product-service-first
 product-service/.serverless
+product-service/serverless
+
+env-variables.txt

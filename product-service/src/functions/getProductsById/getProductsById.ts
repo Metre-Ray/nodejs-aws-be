@@ -2,39 +2,41 @@ import 'source-map-support/register';
 
 import { formatJSONResponse } from '@libs/apiGateway';
 import { middyfy } from '@libs/lambda';
-
-import { products } from '@data/products';
+import { Client } from 'pg';
+import { dbOptions } from '../../../src/config/dbOptions';
 
 export const getProductsById = async (event) => {
-    try {
-        const id = +event.pathParameters.productId;
-        if (Number.isNaN(id)) {
-            return {
-                statusCode: 400,
-                body: {
-                    message: 'Invalid product id',
-                },
-            }
-        }
+    let client: any;
 
-        const product = products.find(prod => prod.id === id);
+    try {
+        console.log('event', event);
+        const id = event.pathParameters.productId;
+
+        client = new Client(dbOptions);
+        await client.connect();
+
+        const { rows: products } = await client.query(`select * from products left join stocks on (products.id = stocks.product_id) where id = '${id}'`);
+        const product = products[0];
+
         if (product) {
             return formatJSONResponse(product);
         }
         return {
             statusCode: 404,
-            body: {
+            body: JSON.stringify({
                 message: 'Product not found',
-            },
+            }),
         }
 
     } catch (e) {
         return {
             statusCode: 500,
-            body: {
+            body: JSON.stringify({
                 message: `Server error: ${e.message}`,
-            },
+            }),
         }
+    } finally {
+        client.end();
     }
 }
 

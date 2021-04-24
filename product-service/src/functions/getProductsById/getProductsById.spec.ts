@@ -11,15 +11,6 @@ describe("getProductsById should return", () => {
         expect((await getProductsById(event)).statusCode).toBe(404);
     });
 
-    test('400 code if id is not valid', async() => {
-        const event = {
-            pathParameters: {
-                productId: 'adc',
-            },
-        };
-        expect((await getProductsById(event)).statusCode).toBe(400);
-    });
-
     test('200 code and product in body if product found', async() => {
         const event = {
             pathParameters: {
