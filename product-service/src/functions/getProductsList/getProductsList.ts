@@ -5,19 +5,29 @@ import 'source-map-support/register';
 // import { IProduct } from '@functions/model';
 import { formatJSONResponse } from '@libs/apiGateway';
 import { middyfy } from '@libs/lambda';
-
-import { products } from '@data/products';
+import { dbOptions } from '../../../src/config/dbOptions';
+import { Client } from 'pg';
 
 export const getProductsList = async () => {
-    try {
+	let client: any;
+
+	try {
+		client = new Client(dbOptions);
+		await client.connect();
+
+		const { rows: products } = await client.query(`select * from products left join stocks on (products.id = stocks.product_id)`);
+		console.log('products', products);
+
       	return formatJSONResponse(products);
     } catch (e) {
 		return {
 			statusCode: 500,
-			body: {
+			body: JSON.stringify({
 				message: `Server error: ${e.message}`,
-			},
+			}),
 		}
+    } finally {
+        client.end();
     }
 }
 

@@ -11,3 +11,8 @@ Find SWAGGER documentation in nodejs-swagger-service/api/swagger.yaml
 To run server for swagger go into nodejs-swagger-service, run `npm i`, then `npm run start` and go to http://localhost:8080/docs
 
 To run Jest tests go into product-service, run `npm i`, then `npm run test`
+
+## Task 4
+
+create product : POST - https://iydulbqdjk.execute-api.eu-west-1.amazonaws.com/dev/products
+
