@@ -16,3 +16,9 @@ To run Jest tests go into product-service, run `npm i`, then `npm run test`
 
 create product : POST - https://iydulbqdjk.execute-api.eu-west-1.amazonaws.com/dev/products
 
+Link to FE: https://d1dolxhjx73de6.cloudfront.net/
+
+
+## Task 5
+
+https://ivsd0ippp8.execute-api.eu-west-1.amazonaws.com/dev/import?name=cv-1  (?name={some-name})
